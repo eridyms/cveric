@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Développeur Informatique</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .cv-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateX(-100px) translateY(-100px); }
+            100% { transform: translateX(100px) translateY(100px); }
+        }
+        
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin: 0 auto 20px;
+            background: #ecf0f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #7f8c8d;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .name {
+            font-size: 2.5em;
+            font-weight: 300;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .title {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-info {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.9em;
+        }
+        
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            background: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+        }
+        
+        .section-title {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #e74c3c;
+        }
+        
+        .experience-item, .education-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .experience-item:hover, .education-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .job-title, .degree {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .company, .school {
+            color: #3498db;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .date {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .skill-category {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-top: 4px solid #3498db;
+        }
+        
+        .skill-category h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .skill-tag {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .project-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-top: 4px solid #e74c3c;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .project-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 15px;
+        }
+        
+        .tech-tag {
+            background: #ecf0f1;
+            color: #2c3e50;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.8em;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header, .contact-info, .content {
+                padding: 20px;
+            }
+            
+            .name {
+                font-size: 2em;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <div class="header">
+            <div class="profile-img">👨‍💻</div>
+            <h1 class="name">[Votre Nom]</h1>
+            <p class="title">Développeur Full Stack</p>
+        </div>
+        
+        <div class="contact-info">
+            <div class="contact-item">
+                <div class="contact-icon">📧</div>
+                <span>votre.email@example.com</span>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">📱</div>
+                <span>+33 6 12 34 56 78</span>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">📍</div>
+                <span>Paris, France</span>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">🔗</div>
+                <span>linkedin.com/in/votrenom</span>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">💻</div>
+                <span>github.com/votrenom</span>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">🌐</div>
+                <span>votre-portfolio.com</span>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">À Propos</h2>
+                <p>Expert en sécurité postale et management de la qualité avec plus de 10 années d'expérience dans le secteur postal. Spécialisé dans l'implémentation des normes UPU, la certification qualité ISO 9001, et le développement d'applications de gestion. Forte expertise en gestion de projet, formation technique et amélioration continue des processus organisationnels.</p>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Compétences Techniques</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>Systèmes Postaux UPU</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">IPS (Integrated Postal System)</span>
+                            <span class="skill-tag">CDS (Customs Declaration System)</span>
+                            <span class="skill-tag">ITMATT</span>
+                            <span class="skill-tag">GMS STAR</span>
+                            <span class="skill-tag">GMS LINK</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Plateformes de Gestion</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">GCSS</span>
+                            <span class="skill-tag">IBIS</span>
+                            <span class="skill-tag">RAIS</span>
+                            <span class="skill-tag">QCS (Quality Control System)</span>
+                            <span class="skill-tag">QCSMail</span>
+                            <span class="skill-tag">CAPE</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Développement & Programmation</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Visual Basic</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">PHP</span>
+                            <span class="skill-tag">Applications Web</span>
+                            <span class="skill-tag">Bases de données</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Outils d'Analyse & Bureautique</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Microsoft Excel Avancé</span>
+                            <span class="skill-tag">SPSS</span>
+                            <span class="skill-tag">SPHYNX</span>
+                            <span class="skill-tag">Google Forms</span>
+                            <span class="skill-tag">KoboToolbox</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Systèmes de Monitoring</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Global Monitoring System (GMS)</span>
+                            <span class="skill-tag">EDI EMSVT</span>
+                            <span class="skill-tag">Serveur REVA</span>
+                            <span class="skill-tag">GMS 2E2</span>
+                            <span class="skill-tag">PRIME</span>
+                            <span class="skill-tag">RUGBY System</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Normes & Certifications</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Normes UPU S58 & S59</span>
+                            <span class="skill-tag">ISO 9001</span>
+                            <span class="skill-tag">Management Qualité</span>
+                            <span class="skill-tag">Audit & Conformité</span>
+                            <span class="skill-tag">Sécurité Postale</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Expérience Professionnelle</h2>
+                
+                <div class="experience-item">
+                    <h3 class="job-title">Expert Sécurité Postale</h3>
+                    <p class="company">Union Postale Pan-Africaine (PAPU)</p>
+                    <p class="date">Août 2024 - Présent</p>
+                    <ul>
+                        <li>Développement de stratégies d'assistance aux opérateurs postaux africains pour l'implémentation des normes de sécurité UPU S58 et S59</li>
+                        <li>Organisation d'ateliers de formation régionaux sur la sécurité postale pour le personnel technique</li>
+                        <li>Facilitation des audits de conformité et certification sécuritaire selon les standards UPU</li>
+                        <li>Production de rapports périodiques sur l'amélioration du statut sécuritaire des installations critiques</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3 class="job-title">Consultant Révision de Processus</h3>
+                    <p class="company">Union Postale Universelle (UPU)</p>
+                    <p class="date">Février - Mars 2024</p>
+                    <ul>
+                        <li>Collaboration avec les opérateurs postaux pour établir l'engagement en matière de sécurité postale</li>
+                        <li>Développement et mise à jour de la documentation requise pour les processus de certification</li>
+                        <li>Support technique pour la détermination et le suivi des besoins individuels des pays</li>
+                        <li>Missions de certification sur site (Madagascar) et en ligne (Niger, Sénégal)</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-item">
+                    <h3 class="job-title">Chef Projet Sécurisation et Mise aux Normes</h3>
+                    <p class="company">La Poste du Bénin SA</p>
+                    <p class="date">Février 2023 - Présent</p>
+                    <ul>
+                        <li>Conduite du processus de certification du bureau d'échange aux normes de sécurité S58 & S59</li>
+                        <li>Management d'une équipe projet de 10 personnes pour l'obtention de la certification niveau B</li>
+                        <li>Formation de tout le personnel sur le management de la qualité et la sécurité postale</li>
+                        <li>Préparation et soumission de la documentation de certification à l'UPU</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3 class="job-title">Chef Projet National Certification Sécurité Postale</h3>
+                    <p class="company">La Poste du Bénin SA</p>
+                    <p class="date">Février 2022 - Janvier 2023</p>
+                    <ul>
+                        <li>Conduite du processus de certification de la Poste du Bénin aux normes de sécurité UPU</li>
+                        <li>Représentation de la Poste du Bénin au niveau UPU pour les questions de sécurité postale</li>
+                        <li>Réalisation de l'audit diagnostic sécurité et analyse des risques de sûreté</li>
+                        <li>Rédaction du plan de sûreté et des plans de gestion des crises</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3 class="job-title">Chef Projet Lettre Recommandée Électronique</h3>
+                    <p class="company">La Poste du Bénin SA</p>
+                    <p class="date">Février 2022 - Février 2023</p>
+                    <ul>
+                        <li>Conception et lancement du projet de lettre recommandée électronique</li>
+                        <li>Étude de marché approfondie pour le service de lettre recommandée électronique</li>
+                        <li>Élaboration des termes de référence du projet avec validation consultant</li>
+                        <li>Intégration de la lettre recommandée dans le plan stratégique de l'entreprise</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3 class="job-title">Coordonnateur National Adjoint du Projet ORE 2</h3>
+                    <p class="company">La Poste du Bénin SA</p>
+                    <p class="date">Mai 2021 - Décembre 2022</p>
+                    <ul>
+                        <li>Suivi de la feuille de route du projet ORE et réalisation des activités planifiées</li>
+                        <li>Formation du personnel sur les exigences UPU en matière de saisie des données ITMATT</li>
+                        <li>Recyclage des agents du bureau d'échange sur les systèmes IPS et CDS</li>
+                        <li>Formation sur les normes de sécurité S58 & S59 et de qualité UPU</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3 class="job-title">Coordonnateur National Global Monitoring System (GMS)</h3>
+                    <p class="company">La Poste du Bénin SA</p>
+                    <p class="date">Novembre 2020 - Présent</p>
+                    <ul>
+                        <li>Gestion des panélistes et exploitation des données GMS STAR pour l'analyse des performances</li>
+                        <li>Identification des dysfonctionnements dans la chaîne d'acheminement postal</li>
+                        <li>Préparation et planification des contrôles GMS 2E2, suivi des performances GMS LINK</li>
+                        <li>Fourniture annuelle des informations pays pour les statistiques GMS et élaboration de rapports</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3 class="job-title">Chef Section Management Qualité et Sécurité Postale</h3>
+                    <p class="company">La Poste du Bénin SA</p>
+                    <p class="date">Novembre 2020 - Présent</p>
+                    <ul>
+                        <li>Supervision du système de management de la qualité et préparation du renouvellement ISO 9001</li>
+                        <li>Conduite d'enquêtes de satisfaction semestrielle clients et personnel avec analyse des résultats</li>
+                        <li>Analyse des rapports générés par QCS, QCSMail, IPS, CDS, CAPE</li>
+                        <li>Rédaction de la documentation des normes S58 & S59 et présentation de tableaux de bord</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3 class="job-title">Consultant Associé - Formateur</h3>
+                    <p class="company">FIDALI</p>
+                    <p class="date">Octobre 2017 - Présent</p>
+                    <ul>
+                        <li>Formation Microsoft Excel avancé et développement web (HTML, PHP)</li>
+                        <li>Expertise en outils d'analyse statistique (SPSS, SPHYNX, Google Forms, KoboToolbox)</li>
+                        <li>Consultation en management de la qualité pour diverses organisations</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3 class="job-title">Chef Cellule Qualité / Assistant Responsable Qualité</h3>
+                    <p class="company">La Poste du Bénin SA</p>
+                    <p class="date">Octobre 2015 - Novembre 2020</p>
+                    <ul>
+                        <li>Supervision des processus du système de management de la qualité ISO 9001:2015</li>
+                        <li>Gestion des contentieux, plaintes clients et réclamations courriers via GCSS, PRIME, RUGBY</li>
+                        <li>Obtention de la certification ISO 9001:2015 et certification niveau C qualité UPU</li>
+                        <li>Élaboration de systèmes automatisés d'évaluation des indicateurs de performance</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3 class="job-title">Responsable National Call Center GCSS/IPC</h3>
+                    <p class="company">La Poste du Bénin SA</p>
+                    <p class="date">Janvier 2014 - Septembre 2015</p>
+                    <ul>
+                        <li>Gestion des plateformes web IBIS, GCSS, RAIS et traitement des réclamations clients</li>
+                        <li>Création d'une application Visual Basic pour la gestion optimisée des plaintes clients</li>
+                        <li>Traitement des comptes d'indemnité CN48 avec les opérateurs désignés via système IPS</li>
+                        <li>Réalisation de performances mensuelles excellentes pour la certification qualité UPU</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3 class="job-title">Coordonnateur National Adjoint GMS</h3>
+                    <p class="company">La Poste du Bénin SA</p>
+                    <p class="date">Juillet 2013 - Décembre 2020</p>
+                    <ul>
+                        <li>Saisie des fiches de contrôle GMS et exploitation des données GMS STAR</li>
+                        <li>Identification des dysfonctionnements et mise en œuvre d'actions correctives</li>
+                        <li>Préparation des fiches et planification des contrôles GMS 2E2</li>
+                        <li>Analyse des rapports de performance GMS STAR et assistance aux rapports d'activité</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3 class="job-title">Responsable Statistiques Postales et Contentieux</h3>
+                    <p class="company">La Poste du Bénin SA</p>
+                    <p class="date">Juillet - Décembre 2013</p>
+                    <ul>
+                        <li>Conception et mise à jour des fiches de collecte statistiques pour 113 bureaux de poste</li>
+                        <li>Mise en place d'une base de données Excel pour la saisie et stockage des informations statistiques</li>
+                        <li>Création d'une application web multi-annuelle pour la gestion des statistiques</li>
+                        <li>Élaboration de dashboards et rapports d'activités pour la direction générale</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Projets Marquants</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h4 class="project-title">Plateforme E-commerce</h4>
+                        <p>Développement complet d'une plateforme de vente en ligne avec panier, paiement sécurisé et gestion des stocks. Plus de 10 000 utilisateurs actifs.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Stripe</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h4 class="project-title">Application Mobile de Fitness</h4>
+                        <p>Application React Native permettant le suivi d'activités sportives avec géolocalisation, graphiques de progression et défis communautaires.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Maps API</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h4 class="project-title">Système de Gestion RH</h4>
+                        <p>Solution complète de gestion des ressources humaines avec modules de paie, congés, évaluations et tableaux de bord analytics.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Formation</h2>
+                
+                <div class="education-item">
+                    <h3 class="degree">Master en Informatique</h3>
+                    <p class="school">Université/École d'Ingénieurs</p>
+                    <p class="date">2016 - 2018</p>
+                    <p>Spécialisation en développement logiciel et systèmes d'information</p>
+                </div>
+                
+                <div class="education-item">
+                    <h3 class="degree">Licence en Informatique</h3>
+                    <p class="school">Université</p>
+                    <p class="date">2013 - 2016</p>
+                    <p>Formation générale en informatique et mathématiques appliquées</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Certifications</h2>
+                <ul>
+                    <li><strong>AWS Certified Solutions Architect</strong> - Amazon Web Services (2023)</li>
+                    <li><strong>Certified Kubernetes Administrator</strong> - Cloud Native Computing Foundation (2023)</li>
+                    <li><strong>Professional Scrum Master I</strong> - Scrum.org (2022)</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Langues</h2>
+                <ul>
+                    <li><strong>Français :</strong> Langue maternelle</li>
+                    <li><strong>Anglais :</strong> Courant (TOEIC 950)</li>
+                    <li><strong>Espagnol :</strong> Intermédiaire</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Centres d'Intérêt</h2>
+                <p>Veille technologique, contribution à des projets open source, photographie, randonnée, jeux vidéo, lecture de blogs techniques et participation à des meetups développeurs.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
